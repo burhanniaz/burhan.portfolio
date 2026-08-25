@@ -1,5 +1,42 @@
-import { sql } from '@vercel/postgres';
+import pg from 'pg';
 import { SEED } from './seed.js';
+
+/*
+  @vercel/postgres only speaks to Neon's HTTP-based proxy (that's what backs
+  Vercel's own "Postgres" storage product) — it cannot reach a regular
+  Postgres server, which is what Supabase is. Pointing it at a Supabase
+  connection string fails every query with a bare "fetch failed", since it's
+  trying an HTTP fetch() against an endpoint that doesn't exist there.
+
+  `pg` speaks the real Postgres wire protocol over TCP, so it works with
+  Supabase (or any other standard Postgres) using the same POSTGRES_URL.
+*/
+const { Pool } = pg;
+
+let pool;
+function getPool(){
+  if(!pool){
+    pool = new Pool({
+      connectionString: process.env.POSTGRES_URL,
+      ssl: { rejectUnauthorized: false },   // Supabase's pooler requires TLS
+      max: 3                                // small — this runs in a serverless function, not a long-lived server
+    });
+  }
+  return pool;
+}
+
+/** Tagged-template query, e.g. sql`SELECT * FROM x WHERE id = ${id}` */
+function sql(strings, ...values){
+  let text = '';
+  strings.forEach((chunk, i) => {
+    text += chunk;
+    if(i < values.length) text += '$' + (i + 1);
+  });
+  return getPool().query(text, values);
+}
+
+/** Plain parameterised query, e.g. sql.query('UPDATE x SET y = $1', [v]) */
+sql.query = (text, params) => getPool().query(text, params);
 
 let ready = null;
 
