@@ -14,6 +14,8 @@ export default async function handler(req, res){
     res.status(200).json(data);
   }catch(err){
     console.error('content:', err);
-    res.status(500).json({ error: 'Could not load content' });
+    // TEMP: surfacing the real error to diagnose the Supabase connection —
+    // revert to the generic message once this is working.
+    res.status(500).json({ error: 'Could not load content', detail: err.message, code: err.code });
   }
 }
