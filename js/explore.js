@@ -296,7 +296,14 @@ function initExplore(content){
       }
       courseList.innerHTML = '<div class="courses-grid">' + list.map(function(c){
         var done = /complete/i.test(c.status);
+        var thumb = c.image
+          ? '<div class="course-thumb"><img src="' + escapeHtml(c.image) + '" alt="" loading="lazy"></div>'
+          : '';
+        var link = c.link
+          ? '<a class="course-link" href="' + escapeHtml(c.link) + '"' + ext(c.link) + '>View course <span aria-hidden="true">&rarr;</span></a>'
+          : '';
         return '<div class="course-card glass">' +
+                 thumb +
                  '<div class="course-top">' +
                    '<div><h3>' + escapeHtml(c.name) + '</h3>' +
                    '<div class="course-org">' + escapeHtml(c.org) + ' &middot; ' + escapeHtml(c.year) + '</div></div>' +
@@ -304,6 +311,7 @@ function initExplore(content){
                  '</div>' +
                  '<p class="desc">' + escapeHtml(c.desc) + '</p>' +
                  '<div class="course-tags">' + c.tags.map(function(t){ return '<span>' + escapeHtml(t) + '</span>'; }).join('') + '</div>' +
+                 link +
                '</div>';
       }).join('') + '</div>';
     }

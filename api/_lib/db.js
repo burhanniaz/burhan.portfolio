@@ -116,8 +116,16 @@ export function init(){
       description TEXT DEFAULT '',
       areas       JSONB DEFAULT '[]'::jsonb,
       tags        JSONB DEFAULT '[]'::jsonb,
+      image       TEXT DEFAULT '',
+      link        TEXT DEFAULT '',
       sort        INTEGER DEFAULT 0
     )`;
+
+    // the courses table already existed in production before image/link were
+    // added — CREATE TABLE IF NOT EXISTS is a no-op there, so add the columns
+    // explicitly too. Safe to run every cold start; no-ops once they exist.
+    await sql`ALTER TABLE courses ADD COLUMN IF NOT EXISTS image TEXT DEFAULT ''`;
+    await sql`ALTER TABLE courses ADD COLUMN IF NOT EXISTS link  TEXT DEFAULT ''`;
 
     const { rows } = await sql`SELECT COUNT(*)::int AS n FROM categories`;
     if(rows[0].n === 0) await seed();
@@ -160,9 +168,10 @@ async function seed(){
 
   i = 0;
   for(const c of SEED.courses){
-    await sql`INSERT INTO courses (name, org, year, status, description, areas, tags, sort)
+    await sql`INSERT INTO courses (name, org, year, status, description, areas, tags, image, link, sort)
               VALUES (${c.name}, ${c.org}, ${c.year}, ${c.status}, ${c.desc},
-                      ${JSON.stringify(c.areas)}::jsonb, ${JSON.stringify(c.tags)}::jsonb, ${i++})`;
+                      ${JSON.stringify(c.areas)}::jsonb, ${JSON.stringify(c.tags)}::jsonb,
+                      ${c.image || ''}, ${c.link || ''}, ${i++})`;
   }
 }
 
@@ -201,7 +210,8 @@ export async function readAll(){
     })),
     courses: courses.rows.map(c => ({
       id: c.id, name: c.name, org: c.org, year: c.year, status: c.status,
-      desc: c.description, areas: c.areas || [], tags: c.tags || []
+      desc: c.description, areas: c.areas || [], tags: c.tags || [],
+      image: c.image || '', link: c.link || ''
     }))
   };
 }

@@ -134,16 +134,18 @@ const RESOURCES = {
   courses: {
     async create(b){
       const { rows } = await sql`SELECT COALESCE(MAX(sort), -1) + 1 AS s FROM courses`;
-      const ins = await sql`INSERT INTO courses (name, org, year, status, description, areas, tags, sort)
+      const ins = await sql`INSERT INTO courses (name, org, year, status, description, areas, tags, image, link, sort)
                             VALUES (${b.name}, ${b.org || ''}, ${b.year || ''},
                                     ${b.status || 'Completed'}, ${b.desc || ''},
-                                    ${J(b.areas)}::jsonb, ${J(b.tags)}::jsonb, ${rows[0].s}) RETURNING id`;
+                                    ${J(b.areas)}::jsonb, ${J(b.tags)}::jsonb,
+                                    ${b.image || ''}, ${b.link || ''}, ${rows[0].s}) RETURNING id`;
       return { id: ins.rows[0].id };
     },
     async update(id, b){
       await sql`UPDATE courses SET name = ${b.name}, org = ${b.org || ''}, year = ${b.year || ''},
                 status = ${b.status || 'Completed'}, description = ${b.desc || ''},
-                areas = ${J(b.areas)}::jsonb, tags = ${J(b.tags)}::jsonb WHERE id = ${id}`;
+                areas = ${J(b.areas)}::jsonb, tags = ${J(b.tags)}::jsonb,
+                image = ${b.image || ''}, link = ${b.link || ''} WHERE id = ${id}`;
     },
     async remove(id){ await sql`DELETE FROM courses WHERE id = ${id}`; }
   }

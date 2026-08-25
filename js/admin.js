@@ -296,7 +296,9 @@
              '</div>' +
              field('Description', textarea('desc', rec.desc || '')) +
              field('Tags', input('tags', csv(rec.tags))) +
-             field('Categories', checkList('areas', c.categories || [], rec.areas, 'id'));
+             field('Categories', checkList('areas', c.categories || [], rec.areas, 'id')) +
+             field('Image (optional)', singleImageHtml(rec.image || '')) +
+             field('Link (optional)', input('link', rec.link || '', 'url'), 'Certificate, course page, or provider link — shown as "View course" on the card.');
     }
 
     function allSubNames(){
@@ -444,6 +446,95 @@
       });
     }
 
+    /* ---------- Single-image field (Courses) ---------- */
+    var draftCourseImage = '';
+
+    function singleImageHtml(url){
+      draftCourseImage = url || '';
+      return '<div id="courseImageBox"></div>' +
+             '<div class="media-add">' +
+               '<input type="file" id="courseImgFile" accept="image/*" class="adm-hidden">' +
+               '<button class="adm-btn sm primary" type="button" id="courseImgUpload">Upload image</button>' +
+               '<button class="adm-btn sm" type="button" id="courseImgUrl">Add by URL</button>' +
+               '<button class="adm-btn sm danger" type="button" id="courseImgClear">Remove</button>' +
+             '</div>' +
+             '<div class="media-progress adm-hidden" id="courseImgProg"><span></span></div>';
+    }
+
+    function paintCourseImage(){
+      var box = document.getElementById('courseImageBox');
+      var clearBtn = document.getElementById('courseImgClear');
+      if(!box) return;
+
+      if(draftCourseImage){
+        box.innerHTML =
+          '<div class="media-item">' +
+            '<div class="media-thumb"><img src="' + esc(draftCourseImage) + '" alt=""></div>' +
+            '<div class="media-meta">' +
+              '<div class="media-kind">image</div>' +
+              '<div class="media-url" title="' + esc(draftCourseImage) + '">' + esc(draftCourseImage) + '</div>' +
+            '</div>' +
+          '</div>';
+        if(clearBtn) clearBtn.hidden = false;
+      } else {
+        box.innerHTML = '<div class="adm-hint">No image set.</div>';
+        if(clearBtn) clearBtn.hidden = true;
+      }
+    }
+
+    function wireCourseImage(){
+      var box = document.getElementById('courseImageBox');
+      if(!box) return;
+      paintCourseImage();
+
+      document.getElementById('courseImgUrl').addEventListener('click', function(){
+        var url = prompt('Paste the image URL:');
+        if(!url) return;
+        draftCourseImage = url.trim();
+        paintCourseImage();
+      });
+
+      document.getElementById('courseImgClear').addEventListener('click', function(){
+        draftCourseImage = '';
+        paintCourseImage();
+      });
+
+      var fileInput = document.getElementById('courseImgFile');
+      document.getElementById('courseImgUpload').addEventListener('click', function(){ fileInput.click(); });
+
+      fileInput.addEventListener('change', async function(){
+        var f = fileInput.files && fileInput.files[0];
+        fileInput.value = '';
+        if(!f) return;
+
+        if(!window.blobUpload){
+          toast('Upload library unavailable — use "Add by URL" instead.', true);
+          return;
+        }
+
+        var prog = document.getElementById('courseImgProg');
+        var bar = prog.querySelector('span');
+        prog.classList.remove('adm-hidden');
+        bar.style.width = '0%';
+
+        try{
+          var blob = await window.blobUpload(f.name, f, {
+            access: 'public',
+            handleUploadUrl: '/api/upload',
+            onUploadProgress: function(p){ bar.style.width = (p.percentage || 0) + '%'; }
+          });
+          draftCourseImage = blob.url;
+          paintCourseImage();
+          toast('Image uploaded');
+        }catch(ex){
+          toast('Upload failed: ' + ex.message, true);
+        }finally{
+          prog.classList.add('adm-hidden');
+          bar.style.width = '0%';
+        }
+      });
+    }
+
     /* ---------- Modal ---------- */
     var modal = null;
 
@@ -479,6 +570,7 @@
       document.getElementById('closeForm').addEventListener('click', closeForm);
       document.getElementById('cancelForm').addEventListener('click', closeForm);
       if(state.tab === 'projects') wireMedia();
+      if(state.tab === 'courses') wireCourseImage();
 
       document.getElementById('admForm').addEventListener('submit', function(e){
         e.preventDefault();
@@ -541,7 +633,8 @@
       } else {
         if(!f.name.trim()) return toast('Course name is required', true);
         body = { name: f.name, org: f.org, year: f.year, status: f.status,
-                 desc: f.desc, areas: f.areas || [], tags: parseCsv(f.tags) };
+                 desc: f.desc, areas: f.areas || [], tags: parseCsv(f.tags),
+                 image: draftCourseImage || '', link: f.link || '' };
       }
 
       btn.disabled = true; btn.textContent = 'Saving…';
