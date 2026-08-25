@@ -13,12 +13,28 @@ import { SEED } from './seed.js';
 */
 const { Pool } = pg;
 
+// Strip any sslmode=... from the URL: pg-connection-string treats
+// sslmode=require as an alias for full certificate-chain verification,
+// which overrides the `ssl` option below and rejects Supabase's pooler
+// certificate as self-signed. Setting `ssl` explicitly (and only that way)
+// is what actually controls TLS here.
+function connectionStringWithoutSslMode(url){
+  if(!url) return url;
+  try{
+    const u = new URL(url);
+    u.searchParams.delete('sslmode');
+    return u.toString();
+  }catch{
+    return url;   // not a parseable URL — leave it as-is, pg will report the real error
+  }
+}
+
 let pool;
 function getPool(){
   if(!pool){
     pool = new Pool({
-      connectionString: process.env.POSTGRES_URL,
-      ssl: { rejectUnauthorized: false },   // Supabase's pooler requires TLS
+      connectionString: connectionStringWithoutSslMode(process.env.POSTGRES_URL),
+      ssl: { rejectUnauthorized: false },   // Supabase's pooler requires TLS, but its cert isn't in Node's default CA store
       max: 3                                // small — this runs in a serverless function, not a long-lived server
     });
   }
