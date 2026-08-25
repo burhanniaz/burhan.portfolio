@@ -188,7 +188,7 @@
       if(!confirm('Delete "' + label + '"?' + extra)) return;
 
       try{
-        await api('/api/admin/' + state.tab + '/' + encodeURIComponent(id), { method: 'DELETE' });
+        await api('/api/admin?resource=' + state.tab + '&id=' + encodeURIComponent(id), { method: 'DELETE' });
         toast('Deleted');
         await reload();
       }catch(ex){ toast(ex.message, true); }
@@ -546,8 +546,8 @@
 
       btn.disabled = true; btn.textContent = 'Saving…';
       try{
-        if(rec) await api('/api/admin/' + state.tab + '/' + encodeURIComponent(rec.id), { method: 'PUT', body: body });
-        else    await api('/api/admin/' + state.tab, { method: 'POST', body: body });
+        if(rec) await api('/api/admin?resource=' + state.tab + '&id=' + encodeURIComponent(rec.id), { method: 'PUT', body: body });
+        else    await api('/api/admin?resource=' + state.tab, { method: 'POST', body: body });
         closeForm();
         toast('Saved');
         await reload();
@@ -559,7 +559,7 @@
 
     /* ---------- Boot ---------- */
     async function reload(){
-      state.content = await api('/api/admin/all');
+      state.content = await api('/api/admin?resource=all');
       render();
     }
 

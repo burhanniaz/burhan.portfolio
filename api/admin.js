@@ -154,13 +154,14 @@ const REORDERABLE = new Set(['categories', 'subcategories', 'projects', 'experie
 export default async function handler(req, res){
   if(!requireAuth(req, res)) return;
 
-  // req.query.path is not reliably populated for catch-all routes on every
-  // Vercel runtime (seen empty under Fluid compute) — parse the segments
-  // straight out of the URL instead, which works everywhere.
-  const pathname = new URL(req.url, 'http://x').pathname;
-  const afterAdmin = pathname.replace(/^\/api\/admin\/?/, '');
-  const parts = afterAdmin ? afterAdmin.split('/').filter(Boolean).map(decodeURIComponent) : [];
-  const [resource, id] = parts;
+  // Vercel's build for api/admin/[...path].js only ever routed a single path
+  // segment through to this function — anything with a second segment (e.g.
+  // /api/admin/subcategories/12) came back as a platform-level 404 before the
+  // handler ever ran. Resource and id are passed as query params instead,
+  // which uses a plain non-dynamic route and sidesteps that entirely.
+  const resource = req.query.resource;
+  const id = req.query.id;
+  const action = req.query.action;
 
   try{
     await init();
@@ -171,8 +172,8 @@ export default async function handler(req, res){
       return res.status(200).json(await readAll());
     }
 
-    // POST /api/admin/:resource/reorder  { ids: [...] }
-    if(req.method === 'POST' && id === 'reorder' && REORDERABLE.has(resource)){
+    // POST /api/admin?resource=:resource&action=reorder  { ids: [...] }
+    if(req.method === 'POST' && action === 'reorder' && REORDERABLE.has(resource)){
       const ids = arr(req.body?.ids);
       for(let i = 0; i < ids.length; i++){
         await sql.query(`UPDATE ${resource} SET sort = $1 WHERE id = $2`, [i, ids[i]]);
