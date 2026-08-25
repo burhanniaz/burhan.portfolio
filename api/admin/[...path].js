@@ -154,7 +154,12 @@ const REORDERABLE = new Set(['categories', 'subcategories', 'projects', 'experie
 export default async function handler(req, res){
   if(!requireAuth(req, res)) return;
 
-  const parts = [].concat(req.query.path || []);
+  // req.query.path is not reliably populated for catch-all routes on every
+  // Vercel runtime (seen empty under Fluid compute) — parse the segments
+  // straight out of the URL instead, which works everywhere.
+  const pathname = new URL(req.url, 'http://x').pathname;
+  const afterAdmin = pathname.replace(/^\/api\/admin\/?/, '');
+  const parts = afterAdmin ? afterAdmin.split('/').filter(Boolean).map(decodeURIComponent) : [];
   const [resource, id] = parts;
 
   try{
@@ -176,13 +181,7 @@ export default async function handler(req, res){
     }
 
     const r = RESOURCES[resource];
-    if(!r){
-      // TEMP: show exactly what Vercel handed us for req.query.path — revert once diagnosed
-      return res.status(404).json({
-        error: 'Unknown resource: method=' + req.method + ' resource=' + JSON.stringify(resource) +
-               ' id=' + JSON.stringify(id) + ' rawPath=' + JSON.stringify(req.query.path)
-      });
-    }
+    if(!r) return res.status(404).json({ error: 'Unknown resource' });
 
     if(req.method === 'POST')   return res.status(201).json(await r.create(req.body || {}) || {});
     if(req.method === 'PUT')    { await r.update(id, req.body || {}); return res.status(200).json({ ok: true }); }
