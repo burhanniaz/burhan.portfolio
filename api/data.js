@@ -1,5 +1,5 @@
-import { sql, init, readAll } from '../_lib/db.js';
-import { requireAuth } from '../_lib/auth.js';
+import { sql, init, readAll } from './_lib/db.js';
+import { requireAuth } from './_lib/auth.js';
 
 const J = v => JSON.stringify(v ?? []);
 const arr = v => Array.isArray(v) ? v : [];
