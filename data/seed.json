@@ -1,0 +1,222 @@
+{
+  "categories": [
+    {
+      "id": "ai-engineering",
+      "name": "AI Engineering",
+      "kind": "Core domain",
+      "viz": "core",
+      "desc": "Designing and deploying LLM-powered applications — retrieval pipelines, evaluation harnesses, and production inference services.",
+      "tags": ["LLM APIs", "RAG", "Vector DBs", "Eval harnesses"],
+      "keys": ["ai", "artificial intelligence", "llm", "gpt", "claude", "openai", "prompt", "inference", "genai", "chatbot"]
+    },
+    {
+      "id": "ai-automation",
+      "name": "AI Automation",
+      "kind": "Core domain",
+      "viz": "flow",
+      "desc": "Building autonomous agents and workflow automations that connect tools, APIs, and data sources to remove manual work.",
+      "tags": ["Agents", "Orchestration", "Webhooks", "Integrations"],
+      "keys": ["automation", "agent", "workflow", "n8n", "zapier", "webhook", "integration", "bot", "orchestration", "pipeline"]
+    },
+    {
+      "id": "machine-learning",
+      "name": "Machine Learning",
+      "kind": "Core domain",
+      "viz": "net",
+      "desc": "Training and evaluating models for classification, forecasting, and recommendation — with an eye on data quality over model size.",
+      "tags": ["PyTorch", "Scikit-learn", "Feature eng.", "MLOps"],
+      "keys": ["ml", "machine learning", "model", "pytorch", "tensorflow", "sklearn", "scikit", "deep learning", "neural", "forecasting", "classification", "mlops"]
+    },
+    {
+      "id": "web-development",
+      "name": "Web Development",
+      "kind": "Core domain",
+      "viz": "browser",
+      "desc": "Full-stack products — from design system to database schema — built for speed, accessibility, and maintainability.",
+      "tags": ["React", "Node.js", "TypeScript", "GraphQL"],
+      "keys": ["web", "frontend", "front end", "backend", "back end", "fullstack", "full stack", "website", "react", "node", "api", "ui", "css", "html"]
+    },
+    {
+      "id": "data-science",
+      "name": "Data Science",
+      "kind": "Core domain",
+      "viz": "chart",
+      "desc": "Turning raw, messy data into dashboards and decisions — pipelines, analysis, and visualization stakeholders actually read.",
+      "tags": ["SQL", "Pandas", "Visualization", "ETL"],
+      "keys": ["data", "analytics", "analysis", "dashboard", "pandas", "numpy", "visualization", "statistics", "insights", "reporting"]
+    },
+    {
+      "id": "llms-rag",
+      "name": "LLMs & RAG",
+      "kind": "Speciality",
+      "viz": "rag",
+      "desc": "Retrieval-augmented generation done properly — chunking strategy, embeddings, reranking, and answers that cite their sources.",
+      "tags": ["Embeddings", "Chunking", "Reranking", "Citations"],
+      "keys": ["rag", "retrieval", "embedding", "vector", "semantic search", "knowledge base", "langchain", "llamaindex", "pinecone", "chroma"]
+    },
+    {
+      "id": "data-engineering",
+      "name": "Data Engineering",
+      "kind": "Speciality",
+      "viz": "db",
+      "desc": "The plumbing behind the analysis — ingestion jobs, warehouse modelling, and ETL that stays reliable when the data gets messy.",
+      "tags": ["SQL", "ETL", "Warehousing", "Airflow"],
+      "keys": ["etl", "elt", "sql", "database", "warehouse", "postgres", "bigquery", "snowflake", "airflow", "ingestion", "schema"]
+    },
+    {
+      "id": "python",
+      "name": "Python Engineering",
+      "kind": "Speciality",
+      "viz": "code",
+      "desc": "Clean, tested Python underneath all of it — services, CLIs, and libraries built to be handed over, not just to run once.",
+      "tags": ["FastAPI", "Testing", "Packaging", "Async"],
+      "keys": ["python", "fastapi", "django", "flask", "script", "cli", "pytest", "library", "backend"]
+    }
+  ],
+
+  "subcats": {
+    "web-development":  ["Ecommerce Store", "Hospital Management", "LMS", "Dashboards", "POS"],
+    "ai-engineering":   ["Chat Assistants", "Document Q&A", "Content Pipelines", "Eval Harnesses"],
+    "ai-automation":    ["CRM Automation", "Email Workflows", "Data Sync", "Reporting Bots"],
+    "machine-learning": ["Forecasting", "Recommendation", "Classification", "Anomaly Detection"],
+    "data-science":     ["Dashboards", "Reporting", "Exploratory Analysis", "A/B Testing"],
+    "llms-rag":         ["Knowledge Base", "Semantic Search", "Citation Systems", "Chunking"],
+    "data-engineering": ["ETL Pipelines", "Warehousing", "Data Quality", "Ingestion"],
+    "python":           ["APIs & Services", "CLI Tools", "Libraries", "Automation Scripts"]
+  },
+
+  "projects": [
+    {
+      "name": "Signal",
+      "title": "Signal — RAG Support Assistant",
+      "areas": ["ai-engineering", "llms-rag", "python"],
+      "subs": ["Document Q&A", "Knowledge Base", "APIs & Services"],
+      "tags": ["Python", "LangChain", "Vector DB"],
+      "media": [
+        { "type": "placeholder", "label": "Screenshot — chat view" },
+        { "type": "placeholder", "label": "Screenshot — source citations" },
+        { "type": "placeholder", "label": "Demo video" }
+      ],
+      "desc": "An LLM-based support assistant that answers product questions from live documentation, with cited sources and a confidence threshold that escalates to a human. Retrieval runs over a chunked, embedded copy of the docs that re-indexes nightly, so answers never drift from the current release. Every response carries inline citations back to the source page, and anything the model is not confident about is handed to a human agent with the conversation context attached rather than guessed at.",
+      "live": "#",
+      "code": "#",
+      "review": { "quote": "Turned a vague automation idea into a working system in under two weeks — and it has been running reliably ever since.", "name": "Placeholder Name", "role": "Product Manager", "initials": "PN", "rating": 5 }
+    },
+    {
+      "name": "Flowline",
+      "title": "Flowline — Ops Automation Suite",
+      "areas": ["ai-automation", "web-development"],
+      "subs": ["CRM Automation", "Dashboards", "Reporting Bots"],
+      "tags": ["Node.js", "Webhooks", "Agents"],
+      "media": [
+        { "type": "placeholder", "label": "Screenshot — workflow builder" },
+        { "type": "placeholder", "label": "Screenshot — run history" }
+      ],
+      "desc": "An automation layer connecting CRM, email, and internal tools, cutting manual ticket triage by roughly 40% for a 15-person ops team. Incoming requests are classified, enriched with account history, and routed to the right queue before anyone opens them. Failed runs retry with backoff and surface in a run-history view, so the team can see exactly what fired and why.",
+      "live": "#",
+      "code": "#",
+      "review": { "quote": "One of the few engineers I have worked with who is equally comfortable in a notebook and a production codebase.", "name": "Placeholder Name", "role": "Engineering Lead", "initials": "PN", "rating": 5 }
+    },
+    {
+      "name": "Pulse",
+      "title": "Pulse — Realtime Analytics",
+      "areas": ["web-development", "data-science"],
+      "subs": ["Dashboards", "Reporting", "Exploratory Analysis"],
+      "tags": ["React", "TypeScript", "WebSockets"],
+      "media": [
+        { "type": "placeholder", "label": "Screenshot — live dashboard" },
+        { "type": "placeholder", "label": "Screenshot — metric drilldown" },
+        { "type": "placeholder", "label": "Demo video" }
+      ],
+      "desc": "A React and WebSocket dashboard surfacing live product metrics, replacing a stack of static spreadsheets for a growth team. Numbers update in place as events arrive, with each tile drilling through to the underlying cohort.",
+      "live": "#",
+      "code": "#",
+      "review": { "quote": "Clear communicator, fast shipper, and genuinely curious about the problem — not just the tech.", "name": "Placeholder Name", "role": "Founder", "initials": "PN", "rating": 4 }
+    },
+    {
+      "name": "Forecastr",
+      "title": "Forecastr — Demand Prediction",
+      "areas": ["machine-learning", "data-engineering", "python"],
+      "subs": ["Forecasting", "ETL Pipelines", "APIs & Services"],
+      "tags": ["PyTorch", "FastAPI", "Docker"],
+      "media": [
+        { "type": "placeholder", "label": "Screenshot — forecast view" },
+        { "type": "placeholder", "label": "Screenshot — accuracy report" }
+      ],
+      "desc": "A time-series forecasting model and API used to plan inventory across three regional warehouses, reducing overstock by double digits. Forecasts are regenerated weekly and served behind a FastAPI endpoint the planning team calls directly from their existing tooling, with backtest accuracy tracked per warehouse so drift is caught before it reaches a purchase order.",
+      "live": "#",
+      "code": "#",
+      "review": null
+    },
+    {
+      "name": "Atlas",
+      "title": "Atlas — Design System & Site",
+      "areas": ["web-development"],
+      "subs": ["Ecommerce Store", "LMS", "POS"],
+      "tags": ["React", "TypeScript", "Storybook"],
+      "media": [
+        { "type": "placeholder", "label": "Screenshot — component library" },
+        { "type": "placeholder", "label": "Screenshot — marketing site" }
+      ],
+      "desc": "A component library and marketing site sharing one set of design tokens, so a colour or spacing change lands everywhere at once. Ships with accessibility checks in CI and a documentation site generated from the components themselves.",
+      "live": "#",
+      "code": "#",
+      "review": { "quote": "The design system paid for itself in a month — our team stopped rebuilding the same button.", "name": "Placeholder Name", "role": "Design Lead", "initials": "PN", "rating": 5 }
+    },
+    {
+      "name": "Ledger",
+      "title": "Ledger — Warehouse & Reporting",
+      "areas": ["data-engineering", "data-science"],
+      "subs": ["Warehousing", "ETL Pipelines", "Data Quality"],
+      "tags": ["SQL", "Airflow", "dbt"],
+      "media": [
+        { "type": "placeholder", "label": "Screenshot — pipeline DAG" },
+        { "type": "placeholder", "label": "Screenshot — reporting layer" }
+      ],
+      "desc": "Nightly ingestion into a modelled warehouse with tested transformations, replacing a fragile set of hand-run scripts. Every table carries freshness and row-count tests, so a broken upstream feed fails loudly instead of quietly reporting stale numbers.",
+      "live": "#",
+      "code": "#",
+      "review": null
+    }
+  ],
+
+  "experience": [
+    {
+      "date": "2024 — Present",
+      "role": "Senior Software Engineer",
+      "org": "Company Placeholder Inc.",
+      "areas": ["ai-engineering", "ai-automation", "llms-rag", "web-development"],
+      "desc": "Leading AI feature development across the product's automation and search surfaces, from prototype to production."
+    },
+    {
+      "date": "2022 — 2024",
+      "role": "Machine Learning Engineer",
+      "org": "Company Placeholder Inc.",
+      "areas": ["machine-learning", "data-engineering", "python"],
+      "desc": "Built and shipped models for recommendation and anomaly detection, and the pipelines that kept them fed with clean data."
+    },
+    {
+      "date": "2020 — 2022",
+      "role": "Full-Stack Developer",
+      "org": "Company Placeholder Inc.",
+      "areas": ["web-development", "data-science"],
+      "desc": "Owned front-to-back development of internal tools and customer-facing dashboards for a growing product team."
+    },
+    {
+      "date": "2019 — 2020",
+      "role": "Junior Developer",
+      "org": "Company Placeholder Inc.",
+      "areas": ["web-development", "python"],
+      "desc": "Started out building web applications and picking up the first pieces of data engineering along the way."
+    }
+  ],
+
+  "courses": [
+    { "name": "Placeholder Course One",   "org": "Provider", "year": "2024", "status": "Completed",   "areas": ["ai-engineering", "llms-rag"],       "tags": ["Topic", "Topic"], "desc": "Short description of what the course covered and what you took away from it." },
+    { "name": "Placeholder Course Two",   "org": "Provider", "year": "2023", "status": "Completed",   "areas": ["machine-learning", "python"],       "tags": ["Topic", "Topic"], "desc": "Short description of what the course covered and what you took away from it." },
+    { "name": "Placeholder Course Three", "org": "Provider", "year": "2025", "status": "In progress", "areas": ["web-development"],                  "tags": ["Topic", "Topic"], "desc": "Short description of what the course covered and what you took away from it." },
+    { "name": "Placeholder Course Four",  "org": "Provider", "year": "2023", "status": "Completed",   "areas": ["data-science", "data-engineering"], "tags": ["Topic", "Topic"], "desc": "Short description of what the course covered and what you took away from it." },
+    { "name": "Placeholder Course Five",  "org": "Provider", "year": "2024", "status": "Completed",   "areas": ["ai-automation"],                    "tags": ["Topic", "Topic"], "desc": "Short description of what the course covered and what you took away from it." },
+    { "name": "Placeholder Course Six",   "org": "Provider", "year": "2025", "status": "In progress", "areas": ["web-development", "data-science"],  "tags": ["Topic", "Topic"], "desc": "Short description of what the course covered and what you took away from it." }
+  ]
+}

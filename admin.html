@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin &mdash; M. Burhan</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%99%EF%B8%8F%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"></div>
+
+<!-- ---------- Login ---------- -->
+<div class="adm-login" id="loginView">
+  <form class="adm-login-card glass" id="loginForm">
+    <span class="eyebrow">Admin</span>
+    <h1>Sign in</h1>
+    <p>Enter the admin password to manage the site's content.</p>
+
+    <div class="adm-field" style="margin-top:22px">
+      <label for="pw">Password</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <div class="adm-hint" id="loginErr" style="color:#c0392b"></div>
+    </div>
+
+    <button class="adm-btn primary" type="submit" id="loginBtn" style="width:100%;padding:12px">Sign in</button>
+  </form>
+</div>
+
+<!-- ---------- Panel ---------- -->
+<div class="adm-shell adm-hidden" id="appView">
+  <div class="adm-top glass">
+    <div>
+      <span class="eyebrow">Admin</span>
+      <h1>Site content</h1>
+    </div>
+    <div class="adm-top-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+      <a class="adm-btn" href="expertise.html" target="_blank" rel="noopener">View site &rarr;</a>
+      <button class="adm-btn" id="logoutBtn" type="button">Sign out</button>
+    </div>
+  </div>
+
+  <div class="adm-tabs" id="admTabs"></div>
+
+  <div class="adm-head">
+    <div>
+      <h2 id="secTitle"></h2>
+      <p id="secNote"></p>
+    </div>
+    <button class="adm-btn primary" id="addBtn" type="button">+ Add</button>
+  </div>
+
+  <div class="adm-list" id="admList"></div>
+</div>
+
+<div class="adm-toast" id="toast"></div>
+
+<script src="js/main.js"></script>
+<script type="module">
+  // Client-side upload lets big video files go straight to Blob storage,
+  // bypassing the ~4.5 MB limit on serverless request bodies.
+  import('https://esm.sh/@vercel/blob@0.27.0/client')
+    .then(function(m){ window.blobUpload = m.upload; })
+    .catch(function(){ console.warn('Blob client unavailable — use the "Add by URL" option instead.'); });
+</script>
+<script src="js/admin.js"></script>
+</body>
+</html>

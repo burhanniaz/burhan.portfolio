@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M. Burhan &mdash; Portfolio</title>
+<meta name="description" content="M. Burhan &mdash; software engineer working across AI engineering, automation, machine learning, web development and data science.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%90%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"></div>
+
+<header class="site-nav">
+  <div class="nav-inner glass">
+    <a href="#top" class="nav-mark"><span class="dot"></span>M. Burhan</a>
+    <div class="nav-links-scroll">
+      <nav class="nav-links">
+        <a href="expertise.html">Expertise</a>
+        <a href="expertise.html">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#testimonials">Reviews</a>
+      </nav>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between light and dark theme" aria-pressed="false">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+    </button>
+    <a class="nav-cta" href="#contact">Let's talk</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-photo-bg" aria-hidden="true"><img src="assets/photo.webp" alt=""></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Portfolio</span>
+        <h1 class="hero-name">M. Burhan builds <span class="grad">systems that ship.</span></h1>
+        <p class="hero-role">Software engineer working across AI, machine learning, web development and data science.</p>
+        <p class="hero-bio">I design and build production systems end to end &mdash; from model pipelines and automation agents to the interfaces people actually use. I like problems that sit between disciplines, where a good data pipeline, a well-trained model, and a clean interface all have to work together.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View projects <span aria-hidden="true">&darr;</span></a>
+          <a class="btn btn-ghost" href="#contact">Get in touch <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="portrait-card">
+          <div class="sheen" aria-hidden="true"></div>
+          <img src="assets/photo.webp" alt="Portrait of M. Burhan">
+        </div>
+        <div class="float-chip glass chip-a"><span class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 3v6M16 23v6M3 16h6M23 16h6"/></svg></span>AI &amp; ML</div>
+        <div class="float-chip glass chip-b"><span class="ico"><svg viewBox="0 0 32 32"><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="21" y="4" width="7" height="7" rx="1"/><path d="M11 16h4a3 3 0 0 0 3-3V8h3"/></svg></span>Automation</div>
+        <div class="float-chip glass chip-c"><span class="ico"><svg viewBox="0 0 32 32"><rect x="3" y="6" width="26" height="20" rx="2"/><path d="M3 11h26M8 8.3h.01M11.5 8.3h.01"/></svg></span>Web &amp; Data</div>
+        <div class="stat-stack">
+          <div class="stat-chip glass"><b>4+</b><span>Years experience</span></div>
+          <div class="stat-chip glass"><b>20+</b><span>Projects shipped</span></div>
+          <div class="stat-chip glass"><b>5</b><span>Core domains</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="marquee-wrap glass reveal">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="marquee-item">AI Engineering <span class="sep">&bull;</span></span>
+        <span class="marquee-item">AI Automation <span class="sep">&bull;</span></span>
+        <span class="marquee-item">Machine Learning <span class="sep">&bull;</span></span>
+        <span class="marquee-item">Web Development <span class="sep">&bull;</span></span>
+        <span class="marquee-item">Data Science <span class="sep">&bull;</span></span>
+        <span class="marquee-item">Python <span class="sep">&bull;</span></span>
+        <span class="marquee-item">React &amp; TypeScript <span class="sep">&bull;</span></span>
+        <span class="marquee-item">LLMs &amp; RAG <span class="sep">&bull;</span></span>
+        <span class="marquee-item">SQL &amp; ETL <span class="sep">&bull;</span></span>
+      </div>
+    </div>
+  </div>
+
+  <section id="expertise">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Areas of expertise</span>
+          <h2>What I build with</h2>
+        </div>
+        <p class="section-note">Five disciplines I move between depending on what the problem actually needs.</p>
+      </div>
+
+      <div class="expertise-grid">
+        <div class="expertise-card glass reveal">
+          <div class="expertise-icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 3v6M16 23v6M3 16h6M23 16h6M7 7l4.2 4.2M20.8 20.8L25 25M25 7l-4.2 4.2M11.2 20.8L7 25"/></svg></div>
+          <h3>AI Engineering</h3>
+          <p>Designing and deploying LLM-powered applications &mdash; retrieval pipelines, evaluation harnesses, and production inference services.</p>
+          <div class="expertise-tags"><span>LLM APIs</span><span>RAG</span><span>Vector DBs</span><span>Eval harnesses</span></div>
+        </div>
+        <div class="expertise-card glass reveal">
+          <div class="expertise-icon"><svg viewBox="0 0 32 32"><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="21" y="4" width="7" height="7" rx="1"/><rect x="21" y="22" width="7" height="7" rx="1"/><path d="M11 16h4a3 3 0 0 0 3-3V8h3M18 24h3v-8"/></svg></div>
+          <h3>AI Automation</h3>
+          <p>Building autonomous agents and workflow automations that connect tools, APIs, and data sources to remove manual work.</p>
+          <div class="expertise-tags"><span>Agents</span><span>Orchestration</span><span>Webhooks</span><span>Integrations</span></div>
+        </div>
+        <div class="expertise-card glass reveal">
+          <div class="expertise-icon"><svg viewBox="0 0 32 32"><circle cx="8" cy="8" r="3"/><circle cx="24" cy="9" r="3"/><circle cx="16" cy="24" r="3"/><path d="M10.5 9.8L21 8.7M9.5 10.8L15 21.5M22.7 11.5L17.3 21.5"/></svg></div>
+          <h3>Machine Learning</h3>
+          <p>Training and evaluating models for classification, forecasting, and recommendation &mdash; with an eye on data quality over model size.</p>
+          <div class="expertise-tags"><span>PyTorch</span><span>Scikit-learn</span><span>Feature eng.</span><span>MLOps</span></div>
+        </div>
+        <div class="expertise-card glass reveal">
+          <div class="expertise-icon"><svg viewBox="0 0 32 32"><rect x="3" y="6" width="26" height="20" rx="2"/><path d="M3 11h26M8 8.3h.01M11.5 8.3h.01"/></svg></div>
+          <h3>Web Development</h3>
+          <p>Full-stack products &mdash; from design system to database schema &mdash; built for speed, accessibility, and maintainability.</p>
+          <div class="expertise-tags"><span>React</span><span>Node.js</span><span>TypeScript</span><span>GraphQL</span></div>
+        </div>
+        <div class="expertise-card glass reveal">
+          <div class="expertise-icon"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="7" rx="11" ry="4"/><path d="M5 7v9c0 2.2 4.9 4 11 4s11-1.8 11-4V7M5 16v9c0 2.2 4.9 4 11 4s11-1.8 11-4v-9"/></svg></div>
+          <h3>Data Science</h3>
+          <p>Turning raw, messy data into dashboards and decisions &mdash; pipelines, analysis, and visualization stakeholders actually read.</p>
+          <div class="expertise-tags"><span>SQL</span><span>Pandas</span><span>Visualization</span><span>ETL</span></div>
+        </div>
+      </div>
+
+      <div class="section-footer">
+        <a class="btn btn-ghost" href="expertise.html">See all expertise <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Selected projects</span>
+          <h2>Recent work</h2>
+        </div>
+        <p class="section-note">Placeholder entries &mdash; swap in your real projects and links.</p>
+      </div>
+
+      <div class="projects-grid">
+        <div class="project-card glass reveal">
+          <div class="project-top"><h3>Signal &mdash; RAG Support Assistant</h3><span class="project-index">01/04</span></div>
+          <p class="desc">An LLM-based support assistant that answers product questions from live documentation, with cited sources and a confidence threshold that escalates to a human.</p>
+          <div class="project-tags"><span>Python</span><span>LangChain</span><span>Vector DB</span></div>
+          <div class="project-links"><a href="#">Live &rarr;</a><a href="#">Code &rarr;</a></div>
+        </div>
+        <div class="project-card glass reveal">
+          <div class="project-top"><h3>Flowline &mdash; Ops Automation Suite</h3><span class="project-index">02/04</span></div>
+          <p class="desc">An automation layer connecting CRM, email, and internal tools, cutting manual ticket triage by roughly 40% for a 15-person ops team.</p>
+          <div class="project-tags"><span>Node.js</span><span>Webhooks</span><span>Agents</span></div>
+          <div class="project-links"><a href="#">Live &rarr;</a><a href="#">Code &rarr;</a></div>
+        </div>
+        <div class="project-card glass reveal">
+          <div class="project-top"><h3>Pulse &mdash; Realtime Analytics</h3><span class="project-index">03/04</span></div>
+          <p class="desc">A React and WebSocket dashboard surfacing live product metrics, replacing a stack of static spreadsheets for a growth team.</p>
+          <div class="project-tags"><span>React</span><span>TypeScript</span><span>WebSockets</span></div>
+          <div class="project-links"><a href="#">Live &rarr;</a><a href="#">Code &rarr;</a></div>
+        </div>
+        <div class="project-card glass reveal">
+          <div class="project-top"><h3>Forecastr &mdash; Demand Prediction</h3><span class="project-index">04/04</span></div>
+          <p class="desc">A time-series forecasting model and API used to plan inventory across three regional warehouses, reducing overstock by double digits.</p>
+          <div class="project-tags"><span>PyTorch</span><span>FastAPI</span><span>Docker</span></div>
+          <div class="project-links"><a href="#">Live &rarr;</a><a href="#">Code &rarr;</a></div>
+        </div>
+      </div>
+
+      <div class="section-footer">
+        <a class="btn btn-ghost" href="expertise.html">Show all projects <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Experience</span>
+          <h2>Where I've worked</h2>
+        </div>
+        <p class="section-note">Placeholder roles &mdash; replace with your real history.</p>
+      </div>
+
+      <div class="timeline glass reveal">
+        <div class="timeline-item">
+          <span class="timeline-date">2024 &mdash; Present</span>
+          <div>
+            <div class="timeline-role">Senior Software Engineer</div>
+            <div class="timeline-org">Company Placeholder Inc.</div>
+            <p class="timeline-desc">Leading AI feature development across the product's automation and search surfaces, from prototype to production.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">2022 &mdash; 2024</span>
+          <div>
+            <div class="timeline-role">Machine Learning Engineer</div>
+            <div class="timeline-org">Company Placeholder Inc.</div>
+            <p class="timeline-desc">Built and shipped models for recommendation and anomaly detection, and the pipelines that kept them fed with clean data.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">2020 &mdash; 2022</span>
+          <div>
+            <div class="timeline-role">Full-Stack Developer</div>
+            <div class="timeline-org">Company Placeholder Inc.</div>
+            <p class="timeline-desc">Owned front-to-back development of internal tools and customer-facing dashboards for a growing product team.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">2019 &mdash; 2020</span>
+          <div>
+            <div class="timeline-role">Junior Developer</div>
+            <div class="timeline-org">Company Placeholder Inc.</div>
+            <p class="timeline-desc">Started out building web applications and picking up the first pieces of data engineering along the way.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-footer">
+        <a class="btn btn-ghost" href="expertise.html">Show all experience <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">What people say</span>
+          <h2>Reviews</h2>
+        </div>
+        <p class="section-note">Placeholder quotes &mdash; swap in real feedback.</p>
+      </div>
+
+      <div class="testimonial-grid">
+        <div class="testimonial-card glass reveal">
+          <q>Turned a vague automation idea into a working system in under two weeks &mdash; and it's been running reliably ever since.</q>
+          <div class="testimonial-who">
+            <div class="avatar">PN</div>
+            <div><div class="testimonial-name">Placeholder Name</div><div class="testimonial-role">Product Manager</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card glass reveal">
+          <q>One of the few engineers I've worked with who's equally comfortable in a notebook and a production React codebase.</q>
+          <div class="testimonial-who">
+            <div class="avatar">PN</div>
+            <div><div class="testimonial-name">Placeholder Name</div><div class="testimonial-role">Engineering Lead</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card glass reveal">
+          <q>Clear communicator, fast shipper, and genuinely curious about the problem &mdash; not just the tech.</q>
+          <div class="testimonial-who">
+            <div class="avatar">PN</div>
+            <div><div class="testimonial-name">Placeholder Name</div><div class="testimonial-role">Founder</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-footer">
+        <a class="btn btn-ghost" href="expertise.html">Show all reviews <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-panel glass reveal">
+        <div>
+          <span class="eyebrow">Get in touch</span>
+          <h2>Let's build something.</h2>
+          <p class="contact-lede">Open to freelance work, full-time roles, and interesting problems in AI, ML, and web systems. Reach out through whichever of these you use most.</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=burhanniaz72@gmail.com" target="_blank" rel="noopener">
+            <span><span class="contact-link-label">Email</span><br>burhanniaz72@gmail.com</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="contact-link" href="https://github.com/burhanniaz" target="_blank" rel="noopener">
+            <span><span class="contact-link-label">GitHub</span><br>github.com/burhanniaz</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/in/burhanniaz" target="_blank" rel="noopener">
+            <span><span class="contact-link-label">LinkedIn</span><br>linkedin.com/in/burhanniaz</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="contact-link" href="https://wa.me/923271949541" target="_blank" rel="noopener">
+            <span><span class="contact-link-label">WhatsApp</span><br>+92 327 1949541</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-panel glass">
+      <span class="footer-mark">M. Burhan</span>
+      <span class="footer-meta">&copy; 2026 &middot; Built with glass &amp; motion</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
