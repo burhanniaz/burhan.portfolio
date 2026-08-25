@@ -48,6 +48,26 @@
       });
     }
 
+    // mobile nav menu
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('navMobile');
+    if(burger && mobileNav){
+      function closeMenu(){
+        mobileNav.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+      burger.addEventListener('click', function(){
+        var open = mobileNav.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', String(open));
+      });
+      mobileNav.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', closeMenu);
+      });
+      window.addEventListener('resize', function(){
+        if(window.innerWidth > 640){ closeMenu(); }
+      });
+    }
+
     // subtle mouse parallax on hero chips
     var visual = document.querySelector('.hero-visual');
     var chips = document.querySelectorAll('.float-chip, .stat-chip');

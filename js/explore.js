@@ -373,7 +373,7 @@ function initExplore(content){
 
     function renderFilterBar(){
       if(!activeArea){
-        filterBar.innerHTML = '<span>Showing everything — pick an area above to narrow it down.</span>';
+        filterBar.innerHTML = '';
         return;
       }
       filterBar.innerHTML =

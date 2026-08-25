@@ -33,7 +33,7 @@
 
   /* ---------- Rows ---------- */
   .adm-list{ display:flex; flex-direction: column; gap: 10px; }
-  .adm-row{ display:flex; align-items:center; gap: 14px; padding: 14px 18px; border-radius: 14px; }
+  .adm-row{ display:flex; align-items:center; gap: 14px; padding: 14px 18px; border-radius: 14px; flex-wrap: wrap; }
   .adm-row-main{ flex: 1; min-width: 0; }
   .adm-row-title{ font-weight: 700; font-size: 0.96rem; }
   .adm-row-sub{ font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-faint); margin-top: 4px; word-break: break-word; }
