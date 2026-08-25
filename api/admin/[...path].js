@@ -176,7 +176,13 @@ export default async function handler(req, res){
     }
 
     const r = RESOURCES[resource];
-    if(!r) return res.status(404).json({ error: 'Unknown resource' });
+    if(!r){
+      // TEMP: show exactly what Vercel handed us for req.query.path — revert once diagnosed
+      return res.status(404).json({
+        error: 'Unknown resource: method=' + req.method + ' resource=' + JSON.stringify(resource) +
+               ' id=' + JSON.stringify(id) + ' rawPath=' + JSON.stringify(req.query.path)
+      });
+    }
 
     if(req.method === 'POST')   return res.status(201).json(await r.create(req.body || {}) || {});
     if(req.method === 'PUT')    { await r.update(id, req.body || {}); return res.status(200).json({ ok: true }); }
