@@ -327,15 +327,72 @@
   .timeline-desc{ color: var(--ink-soft); font-size: 0.94rem; margin-top: 10px; max-width: 62ch; }
 
   /* ---------- Testimonials ---------- */
-  .testimonial-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  @media (max-width: 860px){ .testimonial-grid{ grid-template-columns: 1fr; } }
-  .testimonial-card{ padding: 26px; display:flex; flex-direction:column; gap: 18px; transition: transform .18s ease; }
-  .testimonial-card:hover{ transform: translateY(-4px); }
+  /* deliberately flat: no panel or shadow behind the quote, so the reviews
+     read as text on the page rather than as boxes */
+  .testimonial-card{ padding: 4px 2px; display:flex; flex-direction:column; gap: 16px; }
   .testimonial-card q{ font-family: var(--font-body); font-style: italic; font-weight: 500; font-size: 1.02rem; line-height: 1.5; quotes: none; }
   .testimonial-who{ display:flex; align-items:center; gap: 12px; }
   .avatar{ width: 36px; height:36px; border-radius:50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display:flex; align-items:center; justify-content:center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-ink); flex-shrink:0; }
   .testimonial-name{ font-size: 0.88rem; font-weight: 700; }
   .testimonial-role{ font-size: 0.8rem; color: var(--ink-faint); }
+  .testimonial-project{ color: var(--accent); }
+
+  /* ---------- Reviews carousel (home) ---------- */
+  /* the side gutters reserve space for the arrows so they sit beside the
+     reviews instead of on top of them at any width */
+  .reviews-carousel{ position: relative; padding-inline: 52px; }
+  @media (max-width: 700px){ .reviews-carousel{ padding-inline: 42px; } }
+  .reviews-track{
+    display: flex; gap: 36px; overflow-x: auto; scroll-snap-type: x proximity;
+    scroll-behavior: smooth; scrollbar-width: none;
+    /* room so the focus ring isn't clipped by the overflow container */
+    padding: 6px; margin: -6px;
+  }
+  .reviews-track::-webkit-scrollbar{ display: none; }
+  .reviews-track > .testimonial-card{
+    flex: 0 0 calc((100% - 72px) / 3); scroll-snap-align: start;
+  }
+  @media (max-width: 1000px){ .reviews-track > .testimonial-card{ flex-basis: calc((100% - 36px) / 2); } }
+  @media (max-width: 700px){  .reviews-track > .testimonial-card{ flex-basis: 100%; } }
+  @media (prefers-reduced-motion: reduce){ .reviews-track{ scroll-behavior: auto; } }
+
+  .reviews-loading{
+    font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-faint); padding: 8px 2px;
+  }
+
+  /* the group is only a hide/show handle — the buttons position against
+     .reviews-carousel themselves */
+  .rev-nav-group{ display: contents; }
+  .rev-nav-group[hidden]{ display: none; }
+  .rev-nav{
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    width: 38px; height: 38px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+    display: grid; place-items: center;
+    border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--ink);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    transition: color .16s ease, background .16s ease, border-color .16s ease, opacity .16s ease;
+  }
+  .rev-nav svg{ width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .rev-nav.prev{ left: 0; }
+  .rev-nav.next{ right: 0; }
+  .rev-nav:hover:not(:disabled){
+    color: var(--accent-ink); border-color: transparent;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+  .rev-nav:disabled{ opacity: .3; cursor: default; }
+
+  /* ---------- Review source link (home + expertise) ---------- */
+  .review-source{
+    align-self: flex-start; margin-top: 10px; text-decoration: none;
+    font-family: var(--font-mono); font-size: 0.67rem; letter-spacing: 0.03em;
+    color: var(--ink-faint); display: inline-flex; align-items: center; gap: 5px;
+    border-bottom: 1px solid transparent; padding-bottom: 2px;
+    transition: color .16s ease, border-color .16s ease;
+  }
+  a.review-source:hover{ color: var(--accent); border-bottom-color: var(--accent); }
+  .review-source .ext{ font-size: 0.9em; }
+  .review-source.is-plain{ cursor: default; }
+  .testimonial-card .review-source{ margin-top: auto; padding-top: 12px; }
 
   /* ---------- Contact ---------- */
   .contact-panel{ padding: clamp(28px,4vw,48px); display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px,5vw,56px); }

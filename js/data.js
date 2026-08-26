@@ -19,12 +19,41 @@ window.PortfolioData = (function(){
             areas: p.areas || [], subs: p.subs || [], tags: p.tags || [],
             media: (p.media || []).map(normaliseMedia),
             live: p.live || '#', code: p.code || '#',
-            review: p.review || null
+            review: normaliseReview(p.review)
           };
         }),
         experience: d.experience || [],
         courses:    d.courses    || []
       };
+    }
+
+    // `source` / `sourceUrl` say where a review came from (Fiverr, Upwork, …).
+    // Both are optional: an older review without them simply renders no link.
+    function normaliseReview(r){
+      if(!r || !(r.quote || '').trim()) return null;
+      var name = r.name || '';
+      return {
+        quote: r.quote,
+        name: name,
+        role: r.role || '',
+        initials: r.initials || initialsOf(name),
+        rating: Number(r.rating) || 5,
+        source: r.source || '',
+        sourceUrl: r.sourceUrl || r.source_url || ''
+      };
+    }
+
+    function initialsOf(name){
+      return (name || '?').split(/\s+/).filter(Boolean)
+        .map(function(w){ return w[0]; }).join('').slice(0, 2).toUpperCase() || '?';
+    }
+
+    // every review across all projects, newest project first, for the home page
+    function reviews(d){
+      return (d.projects || []).filter(function(p){ return p.review; })
+        .map(function(p){
+          return { review: p.review, project: p.title || p.name, areas: p.areas || [] };
+        });
     }
 
     // the admin stores uploads as `url`; the original seed used `src`
@@ -59,5 +88,5 @@ window.PortfolioData = (function(){
       return cache;
     }
 
-    return { load: load, normaliseMedia: normaliseMedia };
+    return { load: load, normaliseMedia: normaliseMedia, reviews: reviews };
   })();

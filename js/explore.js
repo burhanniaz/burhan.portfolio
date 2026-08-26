@@ -31,6 +31,8 @@ function initExplore(content){
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
     function pad(n){ return n < 10 ? '0' + n : String(n); }
+    // only ever emit http(s) hrefs, so an admin typo can't become javascript:
+    function safeUrl(u){ return /^https?:\/\//i.test(String(u || '').trim()); }
     function ext(href){ return /^https?:/i.test(href) ? ' target="_blank" rel="noopener"' : ''; }
 
     /* =========================================================
@@ -152,7 +154,21 @@ function initExplore(content){
                '<div class="review-stars" role="img" aria-label="' + (r.rating || 5) + ' out of 5">' + stars + '</div>' +
                '<p class="pcard-quote">' + escapeHtml(r.quote) + '</p>' +
                '<span class="pcard-who">' + escapeHtml(r.name) + ' &middot; ' + escapeHtml(r.role) + '</span>' +
+               sourceHtml(r) +
              '</div>';
+    }
+
+    // where the review came from — a link when we have a URL, plain text when
+    // only the platform name is known, and nothing at all when neither is set
+    function sourceHtml(r){
+      var name = (r.source || '').trim();
+      var url  = (r.sourceUrl || '').trim();
+      if(!name && !url) return '';
+      var label = name ? 'View on ' + escapeHtml(name) : 'View original review';
+      if(!safeUrl(url)) return name ? '<span class="review-source is-plain">via ' + escapeHtml(name) + '</span>' : '';
+      return '<a class="review-source" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' +
+               label + '<span class="ext" aria-hidden="true">&#8599;</span>' +
+             '</a>';
     }
 
     function cardHtml(p){

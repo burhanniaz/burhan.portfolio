@@ -272,6 +272,10 @@
                      return '<option value="' + n + '"' + (Number(rev.rating || 5) === n ? ' selected' : '') + '>' + n + ' / 5</option>';
                    }).join('') + '</select>') +
                  '</div>' +
+               '</div>' +
+               '<div class="adm-grid2">' +
+                 field('Review source', input('rs', rev.source || ''), 'Where it came from — e.g. Fiverr, Upwork, LinkedIn.') +
+                 field('Source URL', input('rsu', rev.sourceUrl || '', 'url'), 'Link to the original review. Must start with http:// or https://.') +
                '</div>';
       }
 
@@ -624,7 +628,8 @@
           review: f.rq && f.rq.trim()
             ? { quote: f.rq, name: f.rn || '', role: f.rr || '',
                 initials: (f.rn || '?').split(/\s+/).map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase(),
-                rating: Number(f.rt) || 5 }
+                rating: Number(f.rt) || 5,
+                source: (f.rs || '').trim(), sourceUrl: (f.rsu || '').trim() }
             : null
         };
       } else if(state.tab === 'experience'){
